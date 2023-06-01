@@ -5,4 +5,4 @@ app.get("/", (req, res) => {
   res.json("Done");
 });
 
-app.listen(3230);
+app.listen(process.env.PORT);
