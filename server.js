@@ -24,7 +24,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  res.json("POST DONE");
+  const sql = "INSERT INTO users WHERE username = ?;";
+  db.query(sql, req.body.username, (err, data) => {
+    res.json(data);
+  });
 });
 
 app.listen(process.env.PORT || 5000);
