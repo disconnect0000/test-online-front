@@ -4,7 +4,7 @@ const mysql = require("mysql");
 
 const app = express();
 app.use(cors());
-
+app.use(express.json());
 const db = mysql.createConnection({
   database: "bys14cmytvyjy0gfobdf",
   user: "u0scs1olouwxhfne",
@@ -24,9 +24,13 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  const sql = "INSERT INTO users WHERE username = ?;";
-  db.query(sql, req.body.username, (err, data) => {
-    res.json(data);
+  const sql = "INSERT INTO users (`username`, `password`) VALUES (?)";
+  let values = [req.body.username, req.body.password];
+
+  db.query(sql, [values], (err, data) => {
+    if (err) {
+      console.log(err);
+    }
   });
 });
 
