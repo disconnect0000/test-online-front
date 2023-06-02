@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-app = express();
+const http = require("http");
+const server = http.createServer(app);
+const app = express();
 app.use(cors());
 
 app.get("/", (req, res) => {
